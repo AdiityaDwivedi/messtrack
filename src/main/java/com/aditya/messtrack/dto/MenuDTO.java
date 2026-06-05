@@ -4,11 +4,12 @@ import lombok.Data;
 
 @Data
 public class MenuDTO {
-    private String Monday;
-    private String Tuesday;
-    private String Wednesday;
-    private String ThursDay;
-    private String Friday;
-    private String Saturday;
-    private String Sunday;
+    private String day;
+    private String breakfast;
+    private String lunch;
+    private String snacks;
+    private String dinner;
+
+    private String collegeName;
+    private String hostelName;
 }

@@ -4,24 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
-
 
 @Entity
-@Getter
-@Setter
-public class Menu {
+public class College {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String day;
-    private String breakfast;
-    private String lunch;
-    private String snacks;
-    private String dinner;
+    private String id;
 
     private String collegeName;
-    private String hostelName;
 }
