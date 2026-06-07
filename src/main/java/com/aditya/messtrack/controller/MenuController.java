@@ -3,6 +3,7 @@ package com.aditya.messtrack.controller;
 import com.aditya.messtrack.dto.MenuDTO;
 import com.aditya.messtrack.entity.Menu;
 import com.aditya.messtrack.service.MenuService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class MenuController {
     private MenuService menuService;
 
     @PostMapping("/menu")
-    public Menu addMenu(@RequestBody MenuDTO menuDTO) {
+    public Menu addMenu(@Valid @RequestBody MenuDTO menuDTO) {
 
         return menuService.addMenu(menuDTO);
     }
@@ -39,7 +40,7 @@ public class MenuController {
     }
 
     @PutMapping("/menu/{id}")
-    public Menu updateMenu(@PathVariable Long id, @RequestBody MenuDTO menuDTO) {
+    public Menu updateMenu(@Valid @PathVariable Long id, @RequestBody MenuDTO menuDTO) {
 
         return menuService.updateMenu(id, menuDTO);
     }
