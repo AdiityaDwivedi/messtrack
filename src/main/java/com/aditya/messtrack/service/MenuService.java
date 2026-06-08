@@ -25,6 +25,13 @@ public class MenuService {
     }
 
     public Menu addMenu(MenuDTO menuDTO) {
+        if(menuRepository.existsByCollegeNameAndHostelNameAndDay(
+                menuDTO.getCollegeName(),
+                menuDTO.getHostelName(),
+                menuDTO.getDay())) {
+
+            throw new RuntimeException("Menu already exists");
+        }
         Menu menu = new Menu();
 
         menu.setDay(menuDTO.getDay());

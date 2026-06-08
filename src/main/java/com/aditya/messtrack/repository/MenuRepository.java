@@ -10,4 +10,6 @@ import java.util.List;
 public interface MenuRepository extends JpaRepository<Menu, Long> {
 
     List<Menu> findByCollegeNameAndHostelName(String collegeName, String hostelName);
+
+    boolean existsByCollegeNameAndHostelNameAndDay(String collegeName, String hostelName, String day);
 }

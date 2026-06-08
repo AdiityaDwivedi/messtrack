@@ -13,4 +13,9 @@ public class GlobalExceptionHandler {
                 .getFieldError()
                 .getDefaultMessage();
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public String handleRuntimeException(RuntimeException ex) {
+        return ex.getMessage();
+    }
 }
