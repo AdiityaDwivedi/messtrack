@@ -49,6 +49,17 @@ public class MenuController {
     public List<Menu> getMenuByCollegeAndHostel(@PathVariable String college, @PathVariable String hostel) {
         return menuService.getMenuByCollegeAndHostel(college, hostel);
     }
+
+    @GetMapping("/menu/today/{college}/{hostel}")
+    public Menu getTodaysMenu(@PathVariable String college, @PathVariable String hostel) {
+        return menuService.getTodaysMenu(college, hostel);
+    }
+
+    @GetMapping("/menu/tomorrow/{college}/{hostel}")
+    public Menu getTomorrowsMenu(@PathVariable String college, @PathVariable String hostel) {
+
+        return menuService.getTomorrowsMenu(college, hostel);
+    }
 }
 
 

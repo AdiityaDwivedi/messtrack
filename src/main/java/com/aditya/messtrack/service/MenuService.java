@@ -2,10 +2,12 @@ package com.aditya.messtrack.service;
 
 import com.aditya.messtrack.dto.MenuDTO;
 import com.aditya.messtrack.entity.Menu;
+import com.aditya.messtrack.enums.Day;
 import com.aditya.messtrack.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,6 +70,24 @@ public class MenuService {
 
     public List<Menu> getMenuByCollegeAndHostel(String college, String hostel) {
         return menuRepository.findByCollegeNameAndHostelName(college, hostel);
+    }
+
+    public Menu getTodaysMenu(String college, String hostel) {
+        Day day = Day.valueOf(LocalDate.now().getDayOfWeek().name());
+
+        return menuRepository
+                .findByCollegeNameAndHostelNameAndDay(college, hostel, day)
+                .orElseThrow(() ->
+                        new RuntimeException("Menu not uploaded yet"));
+    }
+
+    public Menu getTomorrowsMenu(String college, String hostel) {
+        Day day = Day.valueOf(LocalDate.now().plusDays(1).getDayOfWeek().name());
+
+        return menuRepository
+                .findByCollegeNameAndHostelNameAndDay(college, hostel, day)
+                .orElseThrow(() ->
+                        new RuntimeException("Tomorrow Menu is not uploaded yet"));
     }
 }
 

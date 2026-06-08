@@ -1,10 +1,7 @@
 package com.aditya.messtrack.entity;
 
 import com.aditya.messtrack.enums.Day;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +14,7 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     private Day day;
     private String breakfast;
     private String lunch;
