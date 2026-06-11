@@ -62,4 +62,22 @@ public class AnnouncementController {
                 hostel
         );
     }
+
+    @GetMapping("/announcement/latest/{college}/{hostel}")
+    public List<Announcement> getLatestAnnouncement(@PathVariable String college, @PathVariable String hostel) {
+        return announcementService.getLatestAnnouncement(college, hostel);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

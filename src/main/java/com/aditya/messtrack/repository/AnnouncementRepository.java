@@ -14,4 +14,9 @@ public interface AnnouncementRepository
             String collegeName,
             String hostelName
     );
+
+    List<Announcement> findByCollegeNameAndHostelNameOrderByCreatedDateDesc(
+            String collegeName,
+            String hostelName
+    );
 }

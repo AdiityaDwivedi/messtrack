@@ -79,5 +79,16 @@ public class AnnouncementService {
                 );
     }
 
+    public List<Announcement> getLatestAnnouncement (String collegeName, String hostelName) {
+        List<Announcement> announcements = announcementRepository.findByCollegeNameAndHostelNameOrderByCreatedDateDesc(
+                collegeName,
+                hostelName
+        );
 
+        if(announcements.size() <= 5) {
+            return announcements;
+        }
+
+        return announcements.subList(0, 5);
+    }
 }
