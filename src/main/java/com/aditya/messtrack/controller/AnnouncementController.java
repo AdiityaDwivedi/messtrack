@@ -5,6 +5,7 @@ import com.aditya.messtrack.entity.Announcement;
 import com.aditya.messtrack.service.AnnouncementService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +17,13 @@ public class AnnouncementController {
     private AnnouncementService announcementService;
 
     @PostMapping("/announcement")
+    @PreAuthorize(
+            "hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')"
+    )
     public Announcement createAnnouncement(
-            @Valid @RequestBody AnnouncementDTO announcementDTO) {
+            @Valid @RequestBody AnnouncementDTO dto) {
 
-        return announcementService.createAnnouncement(announcementDTO);
+        return announcementService.createAnnouncement(dto);
     }
 
     @GetMapping("/announcement")

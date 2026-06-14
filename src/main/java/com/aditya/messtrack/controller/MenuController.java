@@ -5,6 +5,7 @@ import com.aditya.messtrack.entity.Menu;
 import com.aditya.messtrack.service.MenuService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,11 @@ public class MenuController {
     private MenuService menuService;
 
     @PostMapping("/menu")
-    public Menu addMenu(@Valid @RequestBody MenuDTO menuDTO) {
+    @PreAuthorize(
+            "hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')"
+    )
+    public Menu createMenu(
+            @Valid @RequestBody MenuDTO menuDTO) {
 
         return menuService.addMenu(menuDTO);
     }

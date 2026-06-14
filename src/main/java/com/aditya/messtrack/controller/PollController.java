@@ -6,6 +6,7 @@ import com.aditya.messtrack.entity.Poll;
 import com.aditya.messtrack.service.PollService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,11 @@ public class PollController {
     private PollService pollService;
 
     @PostMapping("/poll")
-    public Poll createPoll(@Valid @RequestBody PollDTO pollDTO) {
+    @PreAuthorize(
+            "hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')"
+    )
+    public Poll createPoll(
+            @Valid @RequestBody PollDTO pollDTO) {
 
         return pollService.createPoll(pollDTO);
     }
