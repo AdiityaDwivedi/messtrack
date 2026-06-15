@@ -2,7 +2,12 @@ package com.aditya.messtrack.service;
 
 import com.aditya.messtrack.dto.PollDTO;
 import com.aditya.messtrack.entity.Poll;
+import com.aditya.messtrack.entity.User;
+import com.aditya.messtrack.entity.Vote;
 import com.aditya.messtrack.repository.PollRepository;
+import com.aditya.messtrack.repository.UserRepository;
+import com.aditya.messtrack.repository.VoteRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +15,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PollService {
 
-    @Autowired
-    PollRepository pollRepository;
+    private final PollRepository pollRepository;
+    private final VoteRepository voteRepository;
+    private final UserRepository userRepository;
 
     public Poll createPoll(PollDTO pollDTO) {
 
@@ -94,32 +101,76 @@ public class PollService {
         );
     }
 
-    public Poll vote(Long id, int option) {
+    public Poll vote(Long pollId, int option, String email) {
 
-        Poll poll = getPollById(id);
+        User user = userRepository
+                .findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+
+        Poll poll = getPollById(pollId);
+
+        if (voteRepository.existsByPollIdAndUserId(
+                pollId,
+                user.getId()
+        )) {
+
+            throw new RuntimeException(
+                    "You have already voted"
+            );
+        }
 
         if (poll.getExpiryDate().isBefore(LocalDate.now())) {
             throw new RuntimeException("Poll has expired");
         }
 
         switch (option) {
+
             case 1:
-                poll.setOption1Votes(poll.getOption1Votes() + 1);
+                poll.setOption1Votes(
+                        poll.getOption1Votes() + 1
+                );
                 break;
 
             case 2:
-                poll.setOption2Votes(poll.getOption2Votes() + 1);
+                poll.setOption2Votes(
+                        poll.getOption2Votes() + 1
+                );
                 break;
 
             case 3:
-                poll.setOption3Votes(poll.getOption3Votes() + 1);
+                poll.setOption3Votes(
+                        poll.getOption3Votes() + 1
+                );
                 break;
 
             default:
-                throw new RuntimeException("Invalid option");
+                throw new RuntimeException(
+                        "Invalid option"
+                );
         }
 
+        Vote vote = new Vote();
+
+        vote.setPollId(pollId);
+        vote.setUserId(user.getId());
+
+        voteRepository.save(vote);
+
         return pollRepository.save(poll);
+    }
+
+    public List<Poll> getActivePolls(
+            String collegeName,
+            String hostelName
+    ) {
+
+        return pollRepository
+                .findByCollegeNameAndHostelNameAndExpiryDateGreaterThanEqual(
+                        collegeName,
+                        hostelName,
+                        LocalDate.now()
+                );
     }
 }
 

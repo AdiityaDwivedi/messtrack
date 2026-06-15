@@ -6,9 +6,8 @@ import com.aditya.messtrack.entity.User;
 import com.aditya.messtrack.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 import com.aditya.messtrack.dto.LoginResponseDTO;
 
 @RestController
@@ -30,5 +29,13 @@ public class UserController {
         String token = userService.login(loginDTO);
 
         return new LoginResponseDTO(token);
+    }
+
+    @PutMapping("/admin/promote/{email}")
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    public User makeHostelAdmin(
+            @PathVariable String email) {
+
+        return userService.makeHostelAdmin(email);
     }
 }

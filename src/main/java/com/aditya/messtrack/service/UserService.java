@@ -45,4 +45,15 @@ public class UserService {
 
         return jwtUtil.generateToken(user.getEmail());
     }
+
+    public User makeHostelAdmin(String email) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+
+        user.setRole(Role.HOSTEL_ADMIN);
+
+        return userRepository.save(user);
+    }
 }

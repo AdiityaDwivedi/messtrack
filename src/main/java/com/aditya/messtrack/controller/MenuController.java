@@ -18,9 +18,7 @@ public class MenuController {
     private MenuService menuService;
 
     @PostMapping("/menu")
-    @PreAuthorize(
-            "hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')"
-    )
+    @PreAuthorize("hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')")
     public Menu createMenu(
             @Valid @RequestBody MenuDTO menuDTO) {
 
@@ -39,12 +37,14 @@ public class MenuController {
     }
 
     @DeleteMapping("/menu/{id}")
+    @PreAuthorize("hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')")
     public void deleteMenu(@PathVariable Long id) {
 
         menuService.deleteMenu(id);
     }
 
     @PutMapping("/menu/{id}")
+    @PreAuthorize("hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')")
     public Menu updateMenu(@Valid @PathVariable Long id, @RequestBody MenuDTO menuDTO) {
 
         return menuService.updateMenu(id, menuDTO);

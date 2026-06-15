@@ -17,9 +17,7 @@ public class AnnouncementController {
     private AnnouncementService announcementService;
 
     @PostMapping("/announcement")
-    @PreAuthorize(
-            "hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')"
-    )
+    @PreAuthorize("hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')")
     public Announcement createAnnouncement(
             @Valid @RequestBody AnnouncementDTO dto) {
 
@@ -40,6 +38,7 @@ public class AnnouncementController {
     }
 
     @PutMapping("/announcement/id/{id}")
+    @PreAuthorize("hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')")
     public Announcement updateAnnouncement(
             @PathVariable Long id,
             @Valid @RequestBody AnnouncementDTO announcementDTO) {
@@ -48,6 +47,7 @@ public class AnnouncementController {
     }
 
     @DeleteMapping("/announcement/id/{id}")
+    @PreAuthorize("hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')")
     public String deleteAnnouncement(
             @PathVariable Long id) {
 
