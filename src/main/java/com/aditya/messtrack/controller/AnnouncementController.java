@@ -18,8 +18,7 @@ public class AnnouncementController {
 
     @PostMapping("/announcement")
     @PreAuthorize("hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')")
-    public Announcement createAnnouncement(
-            @Valid @RequestBody AnnouncementDTO dto) {
+    public Announcement createAnnouncement(@Valid @RequestBody AnnouncementDTO dto) {
 
         return announcementService.createAnnouncement(dto);
     }
@@ -31,25 +30,21 @@ public class AnnouncementController {
     }
 
     @GetMapping("/announcement/id/{id}")
-    public Announcement getAnnouncementById(
-            @PathVariable Long id) {
+    public Announcement getAnnouncementById(@PathVariable Long id) {
 
         return announcementService.getAnnouncementById(id);
     }
 
     @PutMapping("/announcement/id/{id}")
     @PreAuthorize("hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')")
-    public Announcement updateAnnouncement(
-            @PathVariable Long id,
-            @Valid @RequestBody AnnouncementDTO announcementDTO) {
+    public Announcement updateAnnouncement(@PathVariable Long id,  @Valid @RequestBody AnnouncementDTO announcementDTO) {
 
         return announcementService.updateAnnouncement(id, announcementDTO);
     }
 
     @DeleteMapping("/announcement/id/{id}")
     @PreAuthorize("hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')")
-    public String deleteAnnouncement(
-            @PathVariable Long id) {
+    public String deleteAnnouncement(@PathVariable Long id) {
 
         announcementService.deleteAnnouncement(id);
 
@@ -57,9 +52,7 @@ public class AnnouncementController {
     }
 
     @GetMapping("/announcement/hostel/{college}/{hostel}")
-    public List<Announcement> getAnnouncementsByCollegeAndHostel(
-            @PathVariable String college,
-            @PathVariable String hostel) {
+    public List<Announcement> getAnnouncementsByCollegeAndHostel(@PathVariable String college,  @PathVariable String hostel) {
 
         return announcementService.getAnnouncementsByCollegeAndHostel(
                 college,

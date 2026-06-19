@@ -30,8 +30,8 @@ public class AnnouncementService {
 
         announcement.setCreatedDate(LocalDate.now());
 
-        return announcementRepository
-                .save(announcement);
+        //return announcement in .save()
+        return announcementRepository.save(announcement);
     }
 
     public List<Announcement> getAllAnnouncements() {

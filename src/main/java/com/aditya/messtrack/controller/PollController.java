@@ -19,23 +19,19 @@ public class PollController {
 
     @PostMapping("/poll")
     @PreAuthorize("hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')")
-    public Poll createPoll(
-            @Valid @RequestBody PollDTO pollDTO) {
+    public Poll createPoll(@Valid @RequestBody PollDTO pollDTO) {
 
         return pollService.createPoll(pollDTO);
     }
 
     @GetMapping("/poll/{id}")
-    public Poll getPollById(
-            @PathVariable Long id) {
+    public Poll getPollById( @PathVariable Long id) {
 
         return pollService.getPollById(id);
     }
 
     @GetMapping("/poll/hostel/{college}/{hostel}")
-    public List<Poll> getPollsByCollegeAndHostel(
-            @PathVariable String college,
-            @PathVariable String hostel) {
+    public List<Poll> getPollsByCollegeAndHostel( @PathVariable String college,  @PathVariable String hostel) {
 
         return pollService.getPollsByCollegeAndHostel(
                 college,
@@ -50,8 +46,7 @@ public class PollController {
     }
 
     @GetMapping("/poll/{id}/result")
-    public Poll getPollResult(
-            @PathVariable Long id) {
+    public Poll getPollResult( @PathVariable Long id) {
 
         return pollService.getPollById(id);
     }
@@ -65,9 +60,7 @@ public class PollController {
     }
 
     @GetMapping("/poll/active/{college}/{hostel}")
-    public List<Poll> getActivePolls(
-            @PathVariable String college,
-            @PathVariable String hostel
+    public List<Poll> getActivePolls( @PathVariable String college,  @PathVariable String hostel
     ) {
 
         return pollService.getActivePolls(

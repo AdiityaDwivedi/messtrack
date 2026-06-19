@@ -19,8 +19,7 @@ public class MenuController {
 
     @PostMapping("/menu")
     @PreAuthorize("hasRole('HOSTEL_ADMIN') or hasRole('SUPER_ADMIN')")
-    public Menu createMenu(
-            @Valid @RequestBody MenuDTO menuDTO) {
+    public Menu createMenu( @Valid @RequestBody MenuDTO menuDTO) {
 
         return menuService.addMenu(menuDTO);
     }

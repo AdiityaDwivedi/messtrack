@@ -33,8 +33,7 @@ public class UserController {
 
     @PutMapping("/admin/promote/{email}")
     @PreAuthorize("hasRole('SUPER_ADMIN')")
-    public User makeHostelAdmin(
-            @PathVariable String email) {
+    public User makeHostelAdmin( @PathVariable String email) {
 
         return userService.makeHostelAdmin(email);
     }
