@@ -1,0 +1,312 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Inter", sans-serif;
+    background: #eef5ff;
+  }
+  
+  /* ===========================
+     Layout
+  =========================== */
+  
+  .login-container {
+    width: 100%;
+    min-height: 100vh;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    position: relative;
+    overflow: hidden;
+  
+    background: linear-gradient(135deg, #eef5ff 0%, #dbeafe 100%);
+  }
+  
+  /* ===========================
+     Background
+  =========================== */
+  
+  .background-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.06);
+  }
+  
+  .circle-1 {
+    width: 360px;
+    height: 360px;
+    top: -130px;
+    left: -120px;
+  }
+  
+  .circle-2 {
+    width: 250px;
+    height: 250px;
+    right: -70px;
+    top: 150px;
+  }
+  
+  .circle-3 {
+    width: 280px;
+    height: 280px;
+    bottom: -120px;
+    right: -80px;
+  }
+  
+  /* ===========================
+     Login Card
+  =========================== */
+  
+  .login-card {
+    width: 430px;
+    background: white;
+  
+    border-radius: 18px;
+  
+    padding: 32px;
+  
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+  
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* ===========================
+     Brand
+  =========================== */
+  
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  
+    margin-bottom: 28px;
+  }
+  
+  .logo {
+    width: 58px;
+    height: 58px;
+  
+    border-radius: 15px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+  
+    color: white;
+  
+    font-size: 22px;
+  
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.22);
+  }
+  
+  .brand h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #1e40af;
+  }
+  
+  .brand p {
+    font-size: 15px;
+    color: #64748b;
+    margin-top: 3px;
+  }
+  
+  /* ===========================
+     Form
+  =========================== */
+  
+  form label {
+    display: block;
+  
+    font-size: 15px;
+    font-weight: 600;
+    color: #334155;
+  
+    margin-bottom: 8px;
+    margin-top: 18px;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+  
+    height: 50px;
+  
+    border: 1px solid #d6deea;
+    border-radius: 10px;
+  
+    padding: 0 16px;
+  
+    transition: 0.25s ease;
+  }
+  
+  .input-group:focus-within {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  }
+  
+  .input-icon {
+    color: #94a3b8;
+    margin-right: 12px;
+    font-size: 17px;
+  }
+  
+    .input-group input,
+    .input-group select {
+        flex: 1;
+
+        width: 100%;
+
+        border: none;
+        outline: none;
+
+        background: transparent;
+
+        font-size: 15px;
+        color: #1e293b;
+
+        appearance: none;
+        cursor: pointer;
+    }
+  
+  .input-group input::placeholder {
+    color: #94a3b8;
+  }
+  
+  /* ===========================
+     Forgot Password
+  =========================== */
+  
+  .forgot {
+    display: flex;
+    justify-content: flex-end;
+  
+    margin: 10px 0 22px;
+  }
+  
+  .forgot a {
+    font-size: 13px;
+    color: #2563eb;
+  }
+  
+  .forgot a:hover {
+    text-decoration: underline;
+  }
+  
+  /* ===========================
+     Button
+  =========================== */
+  
+  button {
+    width: 100%;
+    height: 50px;
+  
+    border: none;
+    border-radius: 10px;
+  
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+  
+    color: white;
+  
+    font-size: 15px;
+    font-weight: 600;
+  
+    cursor: pointer;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  
+    transition: 0.25s ease;
+  }
+  
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.25);
+  }
+  
+  /* ===========================
+     Divider
+  =========================== */
+  
+  .divider {
+    display: flex;
+    align-items: center;
+  
+    margin: 28px 0;
+  }
+  
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e2e8f0;
+  }
+  
+  .divider span {
+    margin: 0 16px;
+    color: #94a3b8;
+    font-size: 13px;
+  }
+  
+  /* ===========================
+     Register
+  =========================== */
+  
+  .register-text {
+    text-align: center;
+  
+    font-size: 15px;
+    color: #64748b;
+  }
+  
+  .register-text a {
+    color: #2563eb;
+    font-weight: 600;
+  }
+  
+  .register-text a:hover {
+    text-decoration: underline;
+  }
+  
+  /* ===========================
+     Mobile
+  =========================== */
+  
+  @media (max-width: 768px) {
+  
+    .login-card {
+      width: 92%;
+      padding: 28px;
+    }
+  
+    .brand {
+      flex-direction: column;
+      text-align: center;
+      gap: 12px;
+    }
+  
+    .brand h1 {
+      font-size: 28px;
+    }
+  
+    .logo {
+      width: 54px;
+      height: 54px;
+      font-size: 20px;
+    }
+  
+    .background-circle {
+      display: none;
+    }
+  }

@@ -1,31 +1,27 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import Menu from "./pages/Menu";
+import Announcements from "./pages/Announcements";
+import Polls from "./pages/Polls";
+import Admin from "./pages/Admin";
 
 function App() {
-
-  let [cnt, setCounter] = useState(15)
-
-  const addValue = () => {
-    setCounter(cnt+1)
-    console.log(cnt);
-    
-  }
-
-  const removeValue = () => {
-    setCounter(cnt-1)
-    console.log(cnt);
-    
-  }
-
   return (
-    <div>
-      <h2>Click any button</h2>
-      <button onClick={addValue}>Increment</button>
-      <button onClick={removeValue}>Decrement</button>
-      <br />
-      <h3>{cnt}</h3>
-      <h3>{cnt}</h3>
-      <h3>{cnt}</h3>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/announcements" element={<Announcements />} />
+        <Route path="/polls" element={<Polls />} />
+        <Route path="/admin" element={<Admin />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
