@@ -1,9 +1,9 @@
 package com.aditya.messtrack.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Getter
@@ -23,9 +23,13 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    private String collegeName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "college_id", nullable = false)
+    private College college;
 
-    private String hostelName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hostel_id", nullable = false)
+    private Hostel hostel;
 
     @Enumerated(EnumType.STRING)
     private Role role;

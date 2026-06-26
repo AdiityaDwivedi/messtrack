@@ -1,14 +1,15 @@
 package com.aditya.messtrack.dto;
 
+import com.aditya.messtrack.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class HostelDTO {
+public class UserResponseDTO {
 
     private Long id;
     private String name;
+    private String email;
+    private Role role;
 }

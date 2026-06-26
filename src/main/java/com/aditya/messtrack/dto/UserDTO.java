@@ -2,6 +2,7 @@ package com.aditya.messtrack.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -11,15 +12,15 @@ public class UserDTO {
     private String name;
 
     @Email(message = "Invalid email")
-    @NotBlank(message = "Invalid email")
+    @NotBlank(message = "Email cannot be empty")
     private String email;
 
     @NotBlank(message = "Password cannot be empty")
     private String password;
 
-    @NotBlank(message = "College Name cannot be empty")
-    private String collegeName;
+    @NotNull(message = "College is required")
+    private Long collegeId;
 
-    @NotBlank(message = "Hostel Name cannot be empty")
-    private String hostelName;
+    @NotNull(message = "Hostel is required")
+    private Long hostelId;
 }
