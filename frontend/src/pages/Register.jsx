@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../services/authService";
 import "../styles/Register.css";
+import { getColleges, getHostels } from "../services/referenceService";
 
 import {
   FaUser,
@@ -20,15 +21,49 @@ function Register() {
     name: "",
     email: "",
     password: "",
-    collegeName: "",
-    hostelName: "",
+    collegeId: "",
+    hostelId: "",
   });
+  
+  const [colleges, setColleges] = useState([]);
+  const [hostels, setHostels] = useState([]);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  useEffect(() => {
+    loadColleges();
+  }, []);
+
+  const loadColleges = async () => {
+    try {
+      const response = await getColleges();
+      setColleges(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleChange = async (e) => {
+    const { name, value } = e.target;
+  
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  
+    if (name === "collegeId") {
+      try {
+        const response = await getHostels(value);
+  
+        setHostels(response.data);
+  
+        setFormData((prev) => ({
+          ...prev,
+          collegeId: value,
+          hostelId: "",
+        }));
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
 
   const handleRegister = async (e) => {
@@ -115,15 +150,17 @@ function Register() {
             <FaUniversity className="input-icon" />
 
             <select
-              name="collegeName"
-              value={formData.collegeName}
+              name="collegeId"
+              value={formData.collegeId}
               onChange={handleChange}
             >
               <option value="">Select College</option>
 
-              <option value="Bakhtiyarpur College of Engineering">
-                Bakhtiyarpur College of Engineering
-              </option>
+              {colleges.map((college) => (
+                <option key={college.id} value={college.id}>
+                  {college.name}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -133,23 +170,18 @@ function Register() {
             <FaBuilding className="input-icon" />
 
             <select
-              name="hostelName"
-              value={formData.hostelName}
+              name="hostelId"
+              value={formData.hostelId}
               onChange={handleChange}
+              disabled={!formData.collegeId}
             >
               <option value="">Select Hostel</option>
 
-              <option value="Aryabhatta Hostel">
-                Aryabhatta Hostel
-              </option>
-
-              <option value="Chanakya Hostel">
-                Chanakya Hostel
-              </option>
-
-              <option value="Nalanda Hostel">
-                Nalanda Hostel
-              </option>
+              {hostels.map((hostel) => (
+                <option key={hostel.id} value={hostel.id}>
+                  {hostel.name}
+                </option>
+              ))}
             </select>
           </div>
 

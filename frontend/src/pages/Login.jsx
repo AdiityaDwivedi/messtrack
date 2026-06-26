@@ -17,15 +17,20 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await login({
         email,
         password,
       });
-
+  
       localStorage.setItem("token", response.data.token);
-
+  
+      localStorage.setItem(
+        "user",
+        JSON.stringify(response.data.user)
+      );
+  
       navigate("/dashboard");
     } catch (error) {
       console.error(error);
