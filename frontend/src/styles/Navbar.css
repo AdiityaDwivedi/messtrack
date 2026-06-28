@@ -1,0 +1,67 @@
+.navbar{
+
+    height:90px;
+
+    background:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 35px;
+
+    border-bottom:1px solid #edf2f7;
+
+}
+
+.navbar h2{
+
+    color:#1e293b;
+
+    font-size:28px;
+
+}
+
+.navbar p{
+
+    color:#64748b;
+
+    margin-top:4px;
+
+}
+
+.profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.avatar{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
