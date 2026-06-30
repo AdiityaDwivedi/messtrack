@@ -1,29 +1,47 @@
-.layout{
-
-    display:flex;
-
-    min-height:100vh;
-
-    background:#f8fafc;
-
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.main-content{
+body{
+    background:#f5f7fb;
+    font-family:Inter,sans-serif;
+}
 
-    margin-left:250px;
+.dashboard-layout{
+    display:flex;
+    min-height:100vh;
+}
 
-    width:calc(100% - 250px);
+.dashboard-main{
+
+    margin-left:240px;
+
+    width:calc(100% - 240px);
+
+    min-height:100vh;
 
     display:flex;
 
     flex-direction:column;
 
+    transition:.3s;
+
 }
 
-.page-content{
+.dashboard-main.collapsed{
 
-    padding:35px;
+    margin-left:72px;
+
+    width:calc(100% - 72px);
+
+}
+
+.dashboard-content{
 
     flex:1;
+
+    padding:30px;
 
 }

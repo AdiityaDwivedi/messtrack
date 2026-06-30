@@ -1,33 +1,61 @@
+import { FaBars } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
+
 import "../styles/Navbar.css";
 
-function Navbar() {
+function Navbar({ collapsed, setCollapsed }) {
 
-  const { user } = useAuth();
+    const { user } = useAuth();
 
-  return (
-    <header className="navbar">
+    return (
 
-      <div>
-        <h2>Welcome back, {user?.name} 👋</h2>
-        <p>Here's what's happening in your mess today.</p>
-      </div>
+        <header className="navbar">
 
-      <div className="profile">
+            <div className="nav-left">
 
-        <div className="avatar">
-          {user?.name?.charAt(0)}
-        </div>
+                <button
+                    className="menu-btn"
+                    onClick={() => setCollapsed(!collapsed)}
+                >
+                    <FaBars />
+                </button>
 
-        <div>
-          <strong>{user?.name}</strong>
-          <p>{user?.role}</p>
-        </div>
+                <div>
 
-      </div>
+                    <h1>
+                        Welcome back, {user?.name} 👋
+                    </h1>
 
-    </header>
-  );
+                    <p>
+                        Here's what's happening today.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div className="nav-user">
+
+                <div className="avatar">
+
+                    {user?.name?.charAt(0)}
+
+                </div>
+
+                <div>
+
+                    <h4>{user?.name}</h4>
+
+                    <p>{user?.role}</p>
+
+                </div>
+
+            </div>
+
+        </header>
+
+    );
+
 }
 
 export default Navbar;

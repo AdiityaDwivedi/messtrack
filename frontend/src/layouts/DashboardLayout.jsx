@@ -1,19 +1,35 @@
+import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 
 import "../styles/Layout.css";
 
 function DashboardLayout({ children }) {
+
+  const [collapsed, setCollapsed] = useState(true);
+
   return (
-    <div className="layout">
+    <div className="dashboard-layout">
 
-      <Sidebar />
+      <Sidebar
+        collapsed={collapsed}
+        setCollapsed={setCollapsed}
+      />
 
-      <div className="main-content">
+      <div
+        className={
+          collapsed
+            ? "dashboard-main collapsed"
+            : "dashboard-main"
+        }
+      >
 
-        <Navbar />
+        <Navbar
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
+        />
 
-        <main className="page-content">
+        <main className="dashboard-content">
           {children}
         </main>
 

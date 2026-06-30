@@ -1,22 +1,101 @@
+/* ===========================
+   Stats Cards
+=========================== */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(220px,1fr));
+    gap:24px;
+    margin-bottom:30px;
+}
+
+.stat-card{
+    background:#fff;
+    border-radius:20px;
+    padding:24px;
+    box-shadow:0 10px 25px rgba(0,0,0,.05);
+    transition:.25s;
+}
+
+.stat-card:hover{
+    transform:translateY(-4px);
+}
+
+.stat-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.stat-icon{
+    width:56px;
+    height:56px;
+    border-radius:16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+    color:#2563eb;
+    background:#eff6ff;
+}
+
+.stat-title{
+    color:#64748b;
+    font-size:16px;
+}
+
+.stat-value{
+    font-size:44px;
+    font-weight:700;
+    margin:10px 0;
+    color:#111827;
+}
+
+.stat-label{
+    color:#94a3b8;
+    font-size:15px;
+}
+
+/* ===========================
+   Dashboard Grid
+=========================== */
+
 .dashboard-grid{
 
     display:grid;
 
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:1fr 1fr;
 
-    gap:25px;
+    gap:24px;
+
+    align-items:start;
 
 }
+
+/* ===========================
+   Dashboard Cards
+=========================== */
 
 .dashboard-card{
 
     background:white;
 
-    border-radius:20px;
+    border-radius:18px;
 
-    padding:25px;
+    padding:24px;
 
-    box-shadow:0 8px 30px rgba(0,0,0,.05);
+    box-shadow:0 8px 24px rgba(0,0,0,.05);
+
+    min-height:240px;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-2px);
+
+    transition:.25s;
 
 }
 
@@ -28,13 +107,19 @@
 
     gap:12px;
 
-    margin-bottom:25px;
-
-    font-size:20px;
+    margin-bottom:22px;
 
     color:#2563eb;
 
+    font-size:22px;
+
+    font-weight:600;
+
 }
+
+/* ===========================
+   Menu
+=========================== */
 
 .meal-row{
 
@@ -42,15 +127,17 @@
 
     justify-content:space-between;
 
-    padding:14px 0;
+    align-items:center;
 
-    border-bottom:1px solid #f1f5f9;
+    padding:10px 0;
+
+    border-bottom:1px solid #eef2f7;
 
 }
 
 .meal-row:last-child{
 
-    border-bottom:none;
+    border:none;
 
 }
 
@@ -58,33 +145,112 @@
 
     color:#64748b;
 
+    font-size:17px;
+
 }
 
 .meal-row strong{
 
     color:#1e293b;
 
+    font-size:18px;
+
 }
+
+/* ===========================
+   Poll Button
+=========================== */
 
 .vote-btn{
-    margin-top:20px;
+
     width:100%;
-    padding:12px;
+
+    margin-top:22px;
+
+    padding:14px;
+
     border:none;
-    border-radius:10px;
+
+    border-radius:12px;
+
     background:#2563eb;
+
     color:white;
+
+    font-size:16px;
+
     cursor:pointer;
+
 }
 
+.vote-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+/* ===========================
+   Quick Actions
+=========================== */
+
 .quick-links{
+
     display:flex;
+
     flex-direction:column;
-    gap:15px;
+
+    gap:18px;
+
 }
 
 .quick-links a{
+
     text-decoration:none;
+
     color:#2563eb;
+
     font-weight:600;
+
+    font-size:17px;
+
+}
+
+.quick-links a:hover{
+
+    color:#1d4ed8;
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:1200px){
+
+.stats-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:950px){
+
+.dashboard-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:700px){
+
+.stats-grid{
+
+grid-template-columns:1fr;
+
+}
+
 }

@@ -12,27 +12,39 @@
 
     padding:0 35px;
 
-    border-bottom:1px solid #edf2f7;
+    border-bottom:1px solid #eee;
 
 }
 
-.navbar h2{
+.nav-left{
 
-    color:#1e293b;
+    display:flex;
 
-    font-size:28px;
+    align-items:center;
 
-}
-
-.navbar p{
-
-    color:#64748b;
-
-    margin-top:4px;
+    gap:20px;
 
 }
 
-.profile{
+.menu-btn{
+
+    width:45px;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+.nav-user{
 
     display:flex;
 
@@ -44,9 +56,9 @@
 
 .avatar{
 
-    width:48px;
+    width:52px;
 
-    height:48px;
+    height:52px;
 
     border-radius:50%;
 
@@ -56,12 +68,12 @@
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
 
-    font-size:18px;
+    justify-content:center;
 
     font-weight:700;
+
+    font-size:20px;
 
 }
