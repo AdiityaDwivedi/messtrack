@@ -1,5 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import {
     FaHome,
@@ -14,8 +14,14 @@ import "../styles/Sidebar.css";
 
 function Sidebar({ collapsed }) {
 
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate("/login");
+    };
 
     const menu = [
         {
@@ -99,16 +105,17 @@ function Sidebar({ collapsed }) {
 
                 {user?.role !== "STUDENT" && (
 
-                    <Link
-                        to="/admin"
-                        className="nav-link"
-                    >
-
-                        <FaUserShield />
-
-                        {!collapsed && <span>Admin</span>}
-
-                    </Link>
+                <Link
+                to="/admin"
+                className={
+                    location.pathname === "/admin"
+                        ? "nav-link active"
+                        : "nav-link"
+                }
+                >
+                <FaUserShield />
+                {!collapsed && <span>Admin</span>}
+                </Link>
 
                 )}
 
@@ -128,7 +135,7 @@ function Sidebar({ collapsed }) {
 
                 )}
 
-                <button className="logout">
+                <button className="logout" onClick={handleLogout}>
 
                     <FaSignOutAlt />
 

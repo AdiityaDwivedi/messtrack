@@ -1,24 +1,40 @@
 import { FaPoll } from "react-icons/fa";
 
-function PollCard() {
-  return (
-    <div className="dashboard-card">
+function PollCard({ poll }) {
 
-      <div className="card-header">
-        <FaPoll />
-        <h3>Active Poll</h3>
-      </div>
+    return (
 
-      <p>
-        Should we include Ice Cream every Sunday?
-      </p>
+        <div className="dashboard-card">
 
-      <button className="vote-btn">
-        Vote Now
-      </button>
+            <div className="card-header">
+                <FaPoll />
+                <h3>Active Poll</h3>
+            </div>
 
-    </div>
-  );
+            {poll ? (
+
+                <>
+
+                    <p>{poll.question}</p>
+
+                    <button className="vote-btn">
+
+                        Vote Now
+
+                    </button>
+
+                </>
+
+            ) : (
+
+                <p>No active poll.</p>
+
+            )}
+
+        </div>
+
+    );
+
 }
 
 export default PollCard;

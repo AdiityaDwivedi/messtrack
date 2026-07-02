@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import DashboardLayout from "../layouts/DashboardLayout";
 
 import MenuCard from "../components/dashboard/MenuCard";
@@ -6,66 +8,142 @@ import PollCard from "../components/dashboard/PollCard";
 import QuickActionCard from "../components/dashboard/QuickActionCard";
 import StatsCard from "../components/dashboard/StatsCard";
 
+import { useAuth } from "../context/AuthContext";
+
+import { getTodaysMenu } from "../services/menuService";
+import { getLatestAnnouncements } from "../services/announcementService";
+import { getActivePolls } from "../services/pollService";
+
 import {
-FaUtensils,
-FaBullhorn,
-FaPoll,
-FaClock
+    FaUtensils,
+    FaBullhorn,
+    FaPoll,
+    FaClock
 } from "react-icons/fa";
+
 import "../styles/Dashboard.css";
 
 function Dashboard() {
-  return (
-    <DashboardLayout>
-        <div className="stats-grid">
 
-        <StatsCard
-            icon={<FaUtensils />}
-            title="Today's Menu"
-            value="Available"
-            subtitle="Check what's cooking"
-            color="#3b82f6"
-        />
+    const { user } = useAuth();
 
-        <StatsCard
-            icon={<FaBullhorn />}
-            title="Announcements"
-            value="2 New"
-            subtitle="Latest updates"
-            color="#22c55e"
-        />
+    const [menu, setMenu] = useState(null);
+    const [announcements, setAnnouncements] = useState([]);
+    const [poll, setPoll] = useState(null);
 
-        <StatsCard
-            icon={<FaPoll />}
-            title="Active Poll"
-            value="1 Active"
-            subtitle="Your vote matters"
-            color="#8b5cf6"
-        />
+    useEffect(() => {
 
-        <StatsCard
-            icon={<FaClock />}
-            title="Next Meal"
-            value="Lunch"
-            subtitle="12:30 PM - 2:00 PM"
-            color="#f97316"
-        />
-          </div>
+        if (!user) return;
 
-      <div className="dashboard-grid">
+        loadDashboard();
 
-        <MenuCard />
+    }, [user]);
 
-        <AnnouncementCard />
+    const loadDashboard = async () => {
 
-        <PollCard />
+        try {
 
-        <QuickActionCard />
+            const menuResponse = await getTodaysMenu(
+                user.collegeName,
+                user.hostelName
+            );
 
-      </div>
+            setMenu(menuResponse.data);
 
-    </DashboardLayout>
-  );
+        } catch (e) {
+            setMenu(null);
+        }
+
+        try {
+
+            const announcementResponse =
+                await getLatestAnnouncements(
+                    user.collegeName,
+                    user.hostelName
+                );
+
+            setAnnouncements(announcementResponse.data);
+
+        } catch (e) {
+            setAnnouncements([]);
+        }
+
+        try {
+
+            const pollResponse =
+                await getActivePolls(
+                    user.collegeName,
+                    user.hostelName
+                );
+
+            if (pollResponse.data.length > 0) {
+                setPoll(pollResponse.data[0]);
+            } else {
+                setPoll(null);
+            }
+
+        } catch (e) {
+            setPoll(null);
+        }
+
+    };
+
+    return (
+
+        <DashboardLayout>
+
+            <div className="stats-grid">
+
+                <StatsCard
+                    icon={<FaUtensils />}
+                    title="Today's Menu"
+                    value={menu ? "Available" : "Not Uploaded"}
+                    subtitle="Today's meals"
+                    color="#3b82f6"
+                />
+
+                <StatsCard
+                    icon={<FaBullhorn />}
+                    title="Announcements"
+                    value={announcements.length}
+                    subtitle="Latest updates"
+                    color="#22c55e"
+                />
+
+                <StatsCard
+                    icon={<FaPoll />}
+                    title="Active Poll"
+                    value={poll ? "Live" : "None"}
+                    subtitle="Vote now"
+                    color="#8b5cf6"
+                />
+
+                <StatsCard
+                    icon={<FaClock />}
+                    title="Next Meal"
+                    value="Lunch"
+                    subtitle="12:30 PM"
+                    color="#f97316"
+                />
+
+            </div>
+
+            <div className="dashboard-grid">
+
+                <MenuCard menu={menu} />
+
+                <AnnouncementCard announcements={announcements} />
+
+                <PollCard poll={poll} />
+
+                <QuickActionCard />
+
+            </div>
+
+        </DashboardLayout>
+
+    );
+
 }
 
 export default Dashboard;

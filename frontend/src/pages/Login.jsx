@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
 import "../styles/Login.css";
+import { useAuth } from "../context/AuthContext";
 
 import {
   FaEnvelope,
@@ -14,6 +15,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { setToken, setUser } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,13 +26,9 @@ function Login() {
         password,
       });
   
-      localStorage.setItem("token", response.data.token);
-  
-      localStorage.setItem(
-        "user",
-        JSON.stringify(response.data.user)
-      );
-  
+      setToken(response.data.token);
+      setUser(response.data.user);
+      
       navigate("/dashboard");
     } catch (error) {
       console.error(error);

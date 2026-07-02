@@ -1,36 +1,52 @@
 import { FaUtensils } from "react-icons/fa";
 
-function MenuCard() {
-  return (
-    <div className="dashboard-card">
+function MenuCard({ menu }) {
 
-      <div className="card-header">
-        <FaUtensils />
-        <h3>Today's Menu</h3>
-      </div>
+    return (
 
-      <div className="meal-row">
-        <span>Breakfast</span>
-        <strong>Idli & Sambar</strong>
-      </div>
+        <div className="dashboard-card">
 
-      <div className="meal-row">
-        <span>Lunch</span>
-        <strong>Rice, Dal & Paneer</strong>
-      </div>
+            <div className="card-header">
+                <FaUtensils />
+                <h3>Today's Menu</h3>
+            </div>
 
-      <div className="meal-row">
-        <span>Snacks</span>
-        <strong>Samosa</strong>
-      </div>
+            {menu ? (
 
-      <div className="meal-row">
-        <span>Dinner</span>
-        <strong>Roti & Sabji</strong>
-      </div>
+                <>
 
-    </div>
-  );
+                    <div className="meal-row">
+                        <span>Breakfast</span>
+                        <strong>{menu.breakfast}</strong>
+                    </div>
+
+                    <div className="meal-row">
+                        <span>Lunch</span>
+                        <strong>{menu.lunch}</strong>
+                    </div>
+
+                    <div className="meal-row">
+                        <span>Snacks</span>
+                        <strong>{menu.snacks}</strong>
+                    </div>
+
+                    <div className="meal-row">
+                        <span>Dinner</span>
+                        <strong>{menu.dinner}</strong>
+                    </div>
+
+                </>
+
+            ) : (
+
+                <p>No menu uploaded.</p>
+
+            )}
+
+        </div>
+
+    );
+
 }
 
 export default MenuCard;

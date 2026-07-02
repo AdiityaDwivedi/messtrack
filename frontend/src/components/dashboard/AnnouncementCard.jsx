@@ -1,20 +1,43 @@
 import { FaBullhorn } from "react-icons/fa";
 
-function AnnouncementCard() {
-  return (
-    <div className="dashboard-card">
+function AnnouncementCard({ announcements }) {
 
-      <div className="card-header">
-        <FaBullhorn />
-        <h3>Latest Announcement</h3>
-      </div>
+    return (
 
-      <p>
-        Tomorrow's dinner will be served from 7:30 PM due to maintenance.
-      </p>
+        <div className="dashboard-card">
 
-    </div>
-  );
+            <div className="card-header">
+                <FaBullhorn />
+                <h3>Latest Announcements</h3>
+            </div>
+
+            {announcements.length === 0 ? (
+
+                <p>No announcements.</p>
+
+            ) : (
+
+                announcements.slice(0, 3).map(a => (
+
+                    <div
+                        key={a.id}
+                        className="announcement-item"
+                    >
+
+                        <strong>{a.title}</strong>
+
+                        <p>{a.message}</p>
+
+                    </div>
+
+                ))
+
+            )}
+
+        </div>
+
+    );
+
 }
 
 export default AnnouncementCard;
