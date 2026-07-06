@@ -2,10 +2,18 @@ import {
     FaSun,
     FaUtensils,
     FaCoffee,
-    FaMoon
+    FaMoon,
+    FaEdit,
+    FaTrash
 } from "react-icons/fa";
 
-function MenuDayCard({ menu, isToday }) {
+function MenuDayCard({
+    menu,
+    isToday,
+    isAdmin,
+    onEdit,
+    onDelete
+}) {
 
     return (
         <div className={`menu-card ${isToday ? "today-card" : ""}`}>
@@ -53,6 +61,30 @@ function MenuDayCard({ menu, isToday }) {
                     <strong>{menu.dinner}</strong>
                 </div>
             </div>
+
+            {isAdmin && (
+
+                <div className="menu-actions">
+
+                    <button
+                        className="edit-btn"
+                        onClick={() => onEdit(menu)}
+                    >
+                        <FaEdit />
+                        Edit
+                    </button>
+
+                    <button
+                        className="delete-btn"
+                        onClick={() => onDelete(menu)}
+                    >
+                        <FaTrash />
+                        Delete
+                    </button>
+
+                </div>
+
+            )}
 
         </div>
     );

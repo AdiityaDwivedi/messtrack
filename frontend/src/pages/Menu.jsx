@@ -2,11 +2,32 @@ import { useEffect, useState } from "react";
 
 import DashboardLayout from "../layouts/DashboardLayout";
 import MenuDayCard from "../components/menu/MenuDayCard";
+import MenuModal from "../components/menu/MenuModal";
 
 import { useAuth } from "../context/AuthContext";
-import { getMenus } from "../services/menuService";
+import toast from "react-hot-toast";
+
+import {
+    getMenus,
+    createMenu
+} from "../services/menuService";
+
+import {
+    FaPlus,
+    FaUtensils
+} from "react-icons/fa";
 
 import "../styles/Menu.css";
+
+const dayOrder = [
+    "MONDAY",
+    "TUESDAY",
+    "WEDNESDAY",
+    "THURSDAY",
+    "FRIDAY",
+    "SATURDAY",
+    "SUNDAY"
+];
 
 function Menu() {
 
@@ -14,6 +35,7 @@ function Menu() {
 
     const [menus, setMenus] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
 
@@ -32,7 +54,13 @@ function Menu() {
                 user.hostelName
             );
 
-            setMenus(response.data);
+            const sortedMenus = [...response.data].sort(
+                (a, b) =>
+                    dayOrder.indexOf(a.day) -
+                    dayOrder.indexOf(b.day)
+            );
+
+            setMenus(sortedMenus);
 
         } catch (error) {
 
@@ -47,9 +75,43 @@ function Menu() {
 
     };
 
+    const handleCreateMenu = async (formData) => {
+
+        try {
+
+            await createMenu({
+                ...formData,
+                collegeName: user.collegeName,
+                hostelName: user.hostelName
+            });
+            toast.success("Menu created successfully");
+
+            setShowModal(false);
+
+            await loadMenus();
+
+        } catch (error) {
+
+            console.error(error);
+
+            toast.error(
+                error.response?.data?.message ||
+                "Unable to create menu."
+            );
+
+        }
+
+    };
+
     const today = new Date()
-        .toLocaleDateString("en-US", { weekday: "long" })
+        .toLocaleDateString("en-US", {
+            weekday: "long"
+        })
         .toUpperCase();
+
+    const isAdmin =
+        user.role === "HOSTEL_ADMIN" ||
+        user.role === "SUPER_ADMIN";
 
     return (
 
@@ -57,7 +119,25 @@ function Menu() {
 
             <div className="menu-page-header">
 
-                <h1>Weekly Menu</h1>
+                <div className="menu-title">
+
+                    <FaUtensils className="menu-title-icon" />
+
+                    <h1>Weekly Menu</h1>
+
+                </div>
+
+                {isAdmin && (
+
+                    <button
+                        className="add-menu-btn"
+                        onClick={() => setShowModal(true)}
+                    >
+                        <FaPlus />
+                        Add Menu
+                    </button>
+
+                )}
 
             </div>
 
@@ -86,9 +166,12 @@ function Menu() {
                     {menus.map((menu) => (
 
                         <MenuDayCard
-                            key={menu.day}
+                            key={menu.id}
                             menu={menu}
                             isToday={menu.day === today}
+                            isAdmin={isAdmin}
+                            onEdit={(menu) => console.log("Edit", menu)}
+                            onDelete={(menu) => console.log("Delete", menu)}
                         />
 
                     ))}
@@ -96,6 +179,14 @@ function Menu() {
                 </div>
 
             )}
+
+            <MenuModal
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+                onSubmit={handleCreateMenu}
+                initialData={null}
+                title="Add Weekly Menu"
+            />
 
         </DashboardLayout>
 
