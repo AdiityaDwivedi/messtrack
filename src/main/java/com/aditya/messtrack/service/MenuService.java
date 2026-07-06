@@ -49,10 +49,10 @@ public class MenuService {
 
     public Menu updateMenu(Long id, MenuDTO menuDTO) {
 
-        Menu menu = menuRepository.findById(id).get();
+        Menu menu = menuRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Menu not found"));
 
-        menu.setDay(menuDTO.getDay());
-        menu.setBreakfast((menuDTO.getBreakfast()));
+        menu.setBreakfast(menuDTO.getBreakfast());
         menu.setLunch(menuDTO.getLunch());
         menu.setSnacks(menuDTO.getSnacks());
         menu.setDinner(menuDTO.getDinner());

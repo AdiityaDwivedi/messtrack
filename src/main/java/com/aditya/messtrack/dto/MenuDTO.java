@@ -2,11 +2,12 @@ package com.aditya.messtrack.dto;
 
 import com.aditya.messtrack.enums.Day;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class MenuDTO {
-    @NotBlank(message = "Day cannot be empty")
+    @NotNull(message = "Day cannot be empty")
     private Day day;
 
     @NotBlank(message = "breakfast cannot be empty")
