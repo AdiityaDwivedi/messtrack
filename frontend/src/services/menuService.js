@@ -12,6 +12,10 @@ export const getMenus = (college, hostel) => {
     return api.get(`/menu/${college}/${hostel}`);
 };
 
+export const getMenuById = (id) => {
+    return api.get(`/menu/${id}`);
+};
+
 export const createMenu = (menuData) => {
     return api.post("/menu", menuData);
 };

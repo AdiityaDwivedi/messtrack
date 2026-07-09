@@ -9,7 +9,9 @@ import toast from "react-hot-toast";
 
 import {
     getMenus,
-    createMenu
+    createMenu,
+    updateMenu,
+    deleteMenu
 } from "../services/menuService";
 
 import {
@@ -35,7 +37,9 @@ function Menu() {
 
     const [menus, setMenus] = useState([]);
     const [loading, setLoading] = useState(true);
+
     const [showModal, setShowModal] = useState(false);
+    const [selectedMenu, setSelectedMenu] = useState(null);
 
     useEffect(() => {
 
@@ -48,6 +52,8 @@ function Menu() {
     const loadMenus = async () => {
 
         try {
+
+            setLoading(true);
 
             const response = await getMenus(
                 user.collegeName,
@@ -84,9 +90,11 @@ function Menu() {
                 collegeName: user.collegeName,
                 hostelName: user.hostelName
             });
+
             toast.success("Menu created successfully");
 
             setShowModal(false);
+            setSelectedMenu(null);
 
             await loadMenus();
 
@@ -100,6 +108,80 @@ function Menu() {
             );
 
         }
+
+    };
+
+    const handleEditMenu = async (formData) => {
+
+        try {
+
+            await updateMenu(selectedMenu.id, {
+                ...formData,
+                collegeName: user.collegeName,
+                hostelName: user.hostelName
+            });
+
+            toast.success("Menu updated successfully");
+
+            setShowModal(false);
+            setSelectedMenu(null);
+
+            await loadMenus();
+
+        } catch (error) {
+
+            console.error(error);
+
+            toast.error(
+                error.response?.data?.message ||
+                "Unable to update menu."
+            );
+
+        }
+
+    };
+
+    const handleDeleteMenu = async (menu) => {
+
+        try {
+
+            await deleteMenu(menu.id);
+
+            toast.success("Menu deleted successfully");
+
+            await loadMenus();
+
+        } catch (error) {
+
+            console.error(error);
+
+            toast.error(
+                error.response?.data?.message ||
+                "Unable to delete menu."
+            );
+
+        }
+
+    };
+
+    const openCreateModal = () => {
+
+        setSelectedMenu(null);
+        setShowModal(true);
+
+    };
+
+    const openEditModal = (menu) => {
+
+        setSelectedMenu(menu);
+        setShowModal(true);
+
+    };
+
+    const closeModal = () => {
+
+        setShowModal(false);
+        setSelectedMenu(null);
 
     };
 
@@ -131,7 +213,7 @@ function Menu() {
 
                     <button
                         className="add-menu-btn"
-                        onClick={() => setShowModal(true)}
+                        onClick={openCreateModal}
                     >
                         <FaPlus />
                         Add Menu
@@ -170,8 +252,8 @@ function Menu() {
                             menu={menu}
                             isToday={menu.day === today}
                             isAdmin={isAdmin}
-                            onEdit={(menu) => console.log("Edit", menu)}
-                            onDelete={(menu) => console.log("Delete", menu)}
+                            onEdit={openEditModal}
+                            onDelete={handleDeleteMenu}
                         />
 
                     ))}
@@ -182,10 +264,18 @@ function Menu() {
 
             <MenuModal
                 isOpen={showModal}
-                onClose={() => setShowModal(false)}
-                onSubmit={handleCreateMenu}
-                initialData={null}
-                title="Add Weekly Menu"
+                onClose={closeModal}
+                onSubmit={
+                    selectedMenu
+                        ? handleEditMenu
+                        : handleCreateMenu
+                }
+                initialData={selectedMenu}
+                title={
+                    selectedMenu
+                        ? "Edit Weekly Menu"
+                        : "Add Weekly Menu"
+                }
             />
 
         </DashboardLayout>

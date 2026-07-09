@@ -1,0 +1,170 @@
+.announcement-list {
+
+    display:flex;
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+.announcement-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.05);
+
+    transition:.25s;
+
+    display:flex;
+
+    flex-direction:column;
+    max-width:900px;
+    width:100%;
+
+}
+.announcement-header{
+
+    padding-bottom:16px;
+
+    border-bottom:1px solid #eef2f7;
+
+    margin-bottom:18px;
+
+}
+/* 
+.announcement-card:hover{
+
+    transform:translateY(-4px);
+
+} */
+
+.announcement-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:18px;
+
+}
+
+.announcement-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.announcement-icon{
+
+    font-size:24px;
+
+    color:#2563eb;
+
+}
+
+.announcement-title h2{
+
+    font-size:24px;
+
+    color:#1e293b;
+
+    font-weight:700;
+
+}
+
+.announcement-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+}
+
+.announcement-actions button{
+
+    flex:none;
+
+    width:170px;
+
+}
+
+.announcement-icon{
+
+    width:48px;
+    height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:#eff6ff;
+
+    color:#2563eb;
+}
+
+.announcement-message{
+
+    color:#475569;
+
+    font-size:16px;
+
+    line-height:1.7;
+
+    margin-bottom:24px;
+
+    white-space:pre-wrap;
+
+    flex:1;
+
+}
+
+.announcement-date{
+
+    color:#94a3b8;
+
+    font-size:14px;
+
+    margin-bottom:18px;
+
+}
+
+.announcement-actions{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:auto;
+
+}
+
+.announcement-actions .edit-btn,
+.announcement-actions .delete-btn{
+
+    flex:1;
+
+}
+
+@media(max-width:768px){
+
+    .announcement-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}

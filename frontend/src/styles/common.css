@@ -1,0 +1,23 @@
+.menu-modal textarea{
+
+    width:100%;
+    min-height:140px;
+
+    resize:vertical;
+
+    padding:12px;
+
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+
+    font-size:15px;
+    font-family:inherit;
+
+}
+
+.menu-modal textarea:focus{
+
+    outline:none;
+    border-color:#2563eb;
+
+}

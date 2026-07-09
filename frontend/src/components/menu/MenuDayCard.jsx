@@ -15,6 +15,16 @@ function MenuDayCard({
     onDelete
 }) {
 
+    const handleDelete = () => {
+        const confirmed = window.confirm(
+            `Are you sure you want to delete the ${menu.day} menu?`
+        );
+
+        if (!confirmed) return;
+
+        onDelete(menu);
+    };
+
     return (
         <div className={`menu-card ${isToday ? "today-card" : ""}`}>
 
@@ -63,27 +73,27 @@ function MenuDayCard({
             </div>
 
             {isAdmin && (
-
                 <div className="menu-actions">
 
                     <button
+                        type="button"
                         className="edit-btn"
                         onClick={() => onEdit(menu)}
                     >
                         <FaEdit />
-                        Edit
+                        <span>Edit</span>
                     </button>
 
                     <button
+                        type="button"
                         className="delete-btn"
-                        onClick={() => onDelete(menu)}
+                        onClick={handleDelete}
                     >
                         <FaTrash />
-                        Delete
+                        <span>Delete</span>
                     </button>
 
                 </div>
-
             )}
 
         </div>
