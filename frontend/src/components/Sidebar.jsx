@@ -7,7 +7,8 @@ import {
     FaBullhorn,
     FaPoll,
     FaUserShield,
-    FaSignOutAlt
+    FaSignOutAlt,
+    FaUserCircle
 } from "react-icons/fa";
 
 import "../styles/Sidebar.css";
@@ -43,6 +44,11 @@ function Sidebar({ collapsed }) {
             title: "Polls",
             icon: <FaPoll />,
             path: "/polls"
+        },
+        {
+            title: "Profile",
+            icon: <FaUserCircle />,
+            path: "/profile"
         }
     ];
 
@@ -55,31 +61,30 @@ function Sidebar({ collapsed }) {
                     : "sidebar"
             }
         >
+
             <div className="sidebar-header">
 
-              
+                <div className="logo">
 
-              <div className="logo">
+                    <div className="logo-icon">
+                        🍽
+                    </div>
 
-                  <div className="logo-icon">
-                      🍽
-                  </div>
+                    {!collapsed && (
 
-                  {!collapsed && (
+                        <div className="logo-text">
 
-                      <div className="logo-text">
+                            <h2>MessTrack</h2>
 
-                          <h2>MessTrack</h2>
+                            <p>Smart Dining</p>
 
-                          <p>Smart Dining</p>
+                        </div>
 
-                      </div>
+                    )}
 
-                  )}
+                </div>
 
-              </div>
-
-              </div>
+            </div>
 
             <nav>
 
@@ -97,7 +102,9 @@ function Sidebar({ collapsed }) {
 
                         {item.icon}
 
-                        {!collapsed && <span>{item.title}</span>}
+                        {!collapsed && (
+                            <span>{item.title}</span>
+                        )}
 
                     </Link>
 
@@ -105,17 +112,22 @@ function Sidebar({ collapsed }) {
 
                 {user?.role !== "STUDENT" && (
 
-                <Link
-                to="/admin"
-                className={
-                    location.pathname === "/admin"
-                        ? "nav-link active"
-                        : "nav-link"
-                }
-                >
-                <FaUserShield />
-                {!collapsed && <span>Admin</span>}
-                </Link>
+                    <Link
+                        to="/admin"
+                        className={
+                            location.pathname === "/admin"
+                                ? "nav-link active"
+                                : "nav-link"
+                        }
+                    >
+
+                        <FaUserShield />
+
+                        {!collapsed && (
+                            <span>Admin</span>
+                        )}
+
+                    </Link>
 
                 )}
 
@@ -135,7 +147,10 @@ function Sidebar({ collapsed }) {
 
                 )}
 
-                <button className="logout" onClick={handleLogout}>
+                <button
+                    className="logout"
+                    onClick={handleLogout}
+                >
 
                     <FaSignOutAlt />
 

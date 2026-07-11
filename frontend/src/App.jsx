@@ -7,6 +7,7 @@ import Menu from "./pages/Menu";
 import Announcements from "./pages/Announcements";
 import Polls from "./pages/Polls";
 import Admin from "./pages/Admin";
+import Profile from "./pages/Profile";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -19,10 +20,6 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route
-          path="/announcements"
-          element={<Announcements />}
-      />
 
       {/* Protected Routes */}
 
@@ -33,6 +30,15 @@ function App() {
             <Dashboard />
           </ProtectedRoute>
         }
+      />
+
+      <Route
+          path="/profile"
+          element={
+              <ProtectedRoute>
+                  <Profile />
+              </ProtectedRoute>
+          }
       />
 
       <Route
