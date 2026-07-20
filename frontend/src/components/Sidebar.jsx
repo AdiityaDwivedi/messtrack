@@ -6,7 +6,6 @@ import {
     FaUtensils,
     FaBullhorn,
     FaPoll,
-    FaUserShield,
     FaSignOutAlt,
     FaUserCircle
 } from "react-icons/fa";
@@ -109,27 +108,6 @@ function Sidebar({ collapsed }) {
                     </Link>
 
                 ))}
-
-                {user?.role !== "STUDENT" && (
-
-                    <Link
-                        to="/admin"
-                        className={
-                            location.pathname === "/admin"
-                                ? "nav-link active"
-                                : "nav-link"
-                        }
-                    >
-
-                        <FaUserShield />
-
-                        {!collapsed && (
-                            <span>Admin</span>
-                        )}
-
-                    </Link>
-
-                )}
 
             </nav>
 

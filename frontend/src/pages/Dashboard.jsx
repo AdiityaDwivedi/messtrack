@@ -94,37 +94,40 @@ function Dashboard() {
 
             <div className="stats-grid">
 
-                <StatsCard
-                    icon={<FaUtensils />}
-                    title="Today's Menu"
-                    value={menu ? "Available" : "Not Uploaded"}
-                    subtitle="Today's meals"
-                    color="#3b82f6"
-                />
+            <StatsCard
+                icon={<FaUtensils />}
+                title="Today's Menu"
+                value={menu ? "Available" : "Not Uploaded"}
+                subtitle="Today's meals"
+                color="#3b82f6"
+                to="/menu"
+            />
 
-                <StatsCard
-                    icon={<FaBullhorn />}
-                    title="Announcements"
-                    value={announcements.length}
-                    subtitle="Latest updates"
-                    color="#22c55e"
-                />
+            <StatsCard
+                icon={<FaBullhorn />}
+                title="Announcements"
+                value={announcements.length}
+                subtitle="Latest updates"
+                color="#22c55e"
+                to="/announcements"
+            />
 
-                <StatsCard
-                    icon={<FaPoll />}
-                    title="Active Poll"
-                    value={poll ? "Live" : "None"}
-                    subtitle="Vote now"
-                    color="#8b5cf6"
-                />
+            <StatsCard
+                icon={<FaPoll />}
+                title="Active Poll"
+                value={poll ? "Live" : "None"}
+                subtitle="Vote now"
+                color="#8b5cf6"
+                to="/polls"
+            />
 
-                <StatsCard
-                    icon={<FaClock />}
-                    title="Next Meal"
-                    value="Lunch"
-                    subtitle="12:30 PM"
-                    color="#f97316"
-                />
+            <StatsCard
+                icon={<FaClock />}
+                title="Next Meal"
+                value="Lunch"
+                subtitle="12:30 PM"
+                color="#f97316"
+            />
 
             </div>
 

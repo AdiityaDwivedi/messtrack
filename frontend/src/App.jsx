@@ -6,7 +6,6 @@ import Dashboard from "./pages/Dashboard";
 import Menu from "./pages/Menu";
 import Announcements from "./pages/Announcements";
 import Polls from "./pages/Polls";
-import Admin from "./pages/Admin";
 import Profile from "./pages/Profile";
 
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -68,14 +67,6 @@ function App() {
         }
       />
 
-      <Route
-        path="/admin"
-        element={
-          <ProtectedRoute>
-            <Admin />
-          </ProtectedRoute>
-        }
-      />
 
     </Routes>
   );

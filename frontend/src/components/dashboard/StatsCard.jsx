@@ -1,15 +1,26 @@
+import { useNavigate } from "react-router-dom";
 import "../../styles/StatsCard.css";
+
 function StatsCard({
     icon,
     title,
     value,
     subtitle,
-    color
+    color,
+    to
 }) {
+
+    const navigate = useNavigate();
 
     return (
 
-        <div className="stats-card">
+        <div
+            className="stats-card"
+            onClick={() => to && navigate(to)}
+            style={{
+                cursor: to ? "pointer" : "default"
+            }}
+        >
 
             <div
                 className="stats-strip"

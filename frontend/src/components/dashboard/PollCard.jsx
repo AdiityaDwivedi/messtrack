@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { FaPoll } from "react-icons/fa";
 
 function PollCard({ poll }) {
+
+    const navigate = useNavigate();
 
     return (
 
@@ -14,15 +17,14 @@ function PollCard({ poll }) {
             {poll ? (
 
                 <>
-
                     <p>{poll.question}</p>
 
-                    <button className="vote-btn">
-
+                    <button
+                        className="vote-btn"
+                        onClick={() => navigate("/polls")}
+                    >
                         Vote Now
-
                     </button>
-
                 </>
 
             ) : (
