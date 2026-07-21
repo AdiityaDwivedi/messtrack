@@ -79,7 +79,7 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         College college = collegeRepository
-                .findByName("Bakhtiyarpur College of Engineering")
+                .findByName("MIT Muzaffarpur")
                 .orElseThrow();
 
         Hostel hostel = hostelRepository.findByCollegeId(college.getId())
